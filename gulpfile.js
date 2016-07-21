@@ -16,6 +16,8 @@ var jsSources = [
 ];
 
 var sassSources = ['components/sass/style.scss'];
+var htmlSources = ['builds/development/*.html'];
+var jsonSources = ['builds/development/js/*.json'];
 
 // simple tests for gulp tasks
 
@@ -72,6 +74,8 @@ gulp.task('watch', function(){
     gulp.watch(coffeeSources, ['coffee']);
     gulp.watch(jsSources, ['js']);
     gulp.watch('components/sass/style.scss', ['compass']);
+    gulp.watch(htmlSources, ['html']);
+    gulp.watch(jsonSources, ['json']);
 });
 
 
@@ -83,5 +87,17 @@ gulp.task('connect', function() {
    }); 
 });
 
+// reload page when html file changes
+gulp.task('html', function() {
+    gulp.src(htmlSources)
+        .pipe(connect.reload())
+});
+
+// track changes at JSON files
+gulp.task('json', function() {
+    gulp.src(jsonSources)
+        .pipe(connect.reload())
+});
+
 // The default task
-gulp.task('default', ['coffee', 'js', 'compass', 'connect', 'watch']);
+gulp.task('default', ['html', 'json', 'coffee', 'js', 'compass', 'connect', 'watch']);
