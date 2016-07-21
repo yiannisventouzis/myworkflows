@@ -1,3 +1,3 @@
 # Workflows Analysis
 
-Is a project to understand workflow managemet
+Is a project to understand workflow management
